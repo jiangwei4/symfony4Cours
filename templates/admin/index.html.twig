@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello {{ controller_name }}!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+    <h1>Hello {{ controller_name }}! ✅</h1>
+
+</div>
+    {% if is_granted('ROLE_ADMIN') %}
+        <p>admin</p>
+        <ul>
+        {% for us in user %}
+           <li> <p> {{ us.firstname }} {{ us.lastname }}
+                est née le {{ us.birthday |date("m/d/Y") }}
+                et son email est {{ us.email }} <br></p></li>
+            <a href="{{ path('user_remove',{'id':us.id}) }}">suppr</a>
+        {% endfor %}
+        </ul>
+    {% endif %}
+{% endblock %}
