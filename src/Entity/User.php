@@ -43,13 +43,14 @@ class User implements UserInterface
     private $id;
 
     /**
-     *
-     * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank()
+     * @ORM\Column(type="string", length=255,  nullable=true)
      */
     private $firstname;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank()
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $lastname;
 
@@ -61,7 +62,7 @@ class User implements UserInterface
 
     /**
      * @Assert\DateTime()
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime",nullable=true)
      */
     private $birthday;
 

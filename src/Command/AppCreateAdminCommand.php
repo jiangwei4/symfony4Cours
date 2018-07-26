@@ -25,6 +25,7 @@ class AppCreateAdminCommand extends Command
             ->setDescription('Add a short description for your command')
             ->addArgument('email', InputArgument::REQUIRED, 'Email description')
             ->addArgument('password', InputArgument::REQUIRED, 'Password description')
+
         ;
     }
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -32,9 +33,11 @@ class AppCreateAdminCommand extends Command
         $io = new SymfonyStyle($input, $output);
         $email = $input->getArgument('email');
         $password = $input->getArgument('password');
+
         $io->note(sprintf('Create a User for email: %s', $email));
         $user = new User();
         $user->setEmail($email);
+
         $passwordEncoded = $this->encoder->encodePassword($user, $password);
         $user->setPassword($passwordEncoded);
         $user->setRoles(['ROLE_ADMIN']);

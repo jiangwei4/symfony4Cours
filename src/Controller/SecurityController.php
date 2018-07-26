@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Event\UserRegisteredEvent;
 use App\Form\RegisterUserType;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -29,11 +30,12 @@ class SecurityController extends Controller
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($user);
         $entityManager->flush();
-        $logger->info('nouvel utilisateur !');
+
+       // $logger->info('nouvel utilisateur !');
 
 
-        $event = new \UserRegisteredEvent($user);
-        $eventDispatcher->dispatch(\UserRegisteredEvent::NAME,$event);
+        $event = new UserRegisteredEvent($user);
+        $eventDispatcher->dispatch(UserRegisteredEvent::NAME,$event);
 
 
         return $this->redirectToRoute('home');

@@ -20,6 +20,6 @@ class UserSubscriber implements EventSubscriberInterface {
 
     public function onUserRegisteredEvent(UserRegisteredEvent $userRegisteredEvent){
         $user = $userRegisteredEvent->getUser();
-        //code here
+        $this->logger->info('nouvel utilisateur !');
     }
 }
